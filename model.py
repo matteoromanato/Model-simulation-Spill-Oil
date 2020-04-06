@@ -24,7 +24,7 @@ class OilSpread(Model):
 
        
         self.datacollector = DataCollector(
-            {"Petrolio": lambda m: m.schedule.get_agent_count()
+            {"Oil": lambda m: m.schedule.get_agent_count()
              #"Cane": lambda m: self.count_type(self, 0)
             })
 

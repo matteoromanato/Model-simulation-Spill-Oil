@@ -4,11 +4,11 @@ from mesa.space import Grid
 from mesa.datacollection import DataCollector
 from mesa.time import RandomActivation
 from collections import defaultdict
-from agents import Oil, Boat
+from agents import Oil, Boat, Land
 
 
 class OilSpread(Model):
-    def __init__ (self, height=20, width=20, initial_macchie= 1, qnt = 10, qnt_prop = 50,initial_barche= 1, power_boat = 3):
+    def __init__ (self, height=20, width=20, initial_macchie= 1, qnt = 10, qnt_prop = 50,initial_barche= 1, power_boat = 3, initial_land = 20):
         
         self.height = height
         self.width = width
@@ -17,6 +17,7 @@ class OilSpread(Model):
         self.qnt_prop = qnt_prop
         self.initial_barche = initial_barche
         self.power_boat=power_boat
+        self.initial_land = initial_land
 
 
         self.schedule = RandomActivation(self)
@@ -28,9 +29,17 @@ class OilSpread(Model):
              #"Cane": lambda m: self.count_type(self, 0)
             })
 
+# Create macchie di petrolio
+        for i in range(self.initial_land):          
+            x = 0
+            y = self.random.randrange(self.height)
+            terra = Land((x, y), self, 0)
+            self.grid.place_agent(terra, (x, y))
+            self.schedule.add(terra)
+
         # Create macchie di petrolio
-        for i in range(self.initial_macchie):          
-            x = self.random.randrange(self.width)
+        for i in range(self.initial_macchie):   
+            x = self.random.randrange(self.width)       
             y = self.random.randrange(self.height)
             macchia = Oil((x, y), self, qnt, qnt_prop)
             self.grid.place_agent(macchia, (x, y))

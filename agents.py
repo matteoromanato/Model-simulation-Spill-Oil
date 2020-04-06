@@ -72,4 +72,6 @@ class Land(Agent):
         self.type = 2
 
     def step(self):
-        print("ciao")
+        for neighbor in self.model.grid.neighbor_iter(self.pos):
+            if neighbor.type == 0:
+                self.status = 1

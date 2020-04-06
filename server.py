@@ -18,8 +18,8 @@ def Spread_Oil_portrayal(agent):
         portrayal["text"] = round(agent.qnt, 1)
         portrayal["text_color"] = "White"
     if type(agent) is Boat:
-        portrayal["Color"] = ["#222222", "#222222"]
-        portrayal["stroke_color"] = "#FF00FF"
+        portrayal["Color"] = ["#00FFFF", "#FFFFFF"]
+        portrayal["stroke_color"] = "#FFFFFF"
         portrayal["text"] = round(agent.power, 1)
         portrayal["text_color"] = "Green"
 

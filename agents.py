@@ -12,9 +12,9 @@ class Oil(Agent):
 
     def step(self):
         # causa dele correnti il petrolio si sposta non rimane fermo
-        possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,include_center=False)
-        new_position = self.random.choice(possible_steps)
-        self.model.grid.move_agent(self, new_position)
+        #possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,include_center=False)
+        #new_position = self.random.choice(possible_steps)
+        #self.model.grid.move_agent(self, new_position)
  
         #oltre a spostarsi il petrolio si sparge coprendo un'area maggiore
         if (self.qnt*self.qnt_prop/100) >= 1:
@@ -62,7 +62,14 @@ class Boat(Agent):
         self.model.grid.move_agent(self, new_position)
 
        
-       
+class Land(Agent):
+   
+    def __init__(self,pos,model,status):
 
-       
+        super().__init__(pos,model)
+        self.pos = pos
+        self.status = status                # lo status indica se la terra è stata contaminata(1) o siamo riusciti a preservarla(0)
+        self.type = 2
 
+    def step(self):
+        print("ciao")

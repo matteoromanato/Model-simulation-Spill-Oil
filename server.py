@@ -40,7 +40,7 @@ model_params = {"initial_macchie": UserSettableParameter('slider', 'quantità di
                 "initial_land": UserSettableParameter('slider', 'quantità di terra', 20, 0, 20),
                 "initial_barche": UserSettableParameter('slider', 'quantità di barche rimuovi petrolio', 1, 0, 10),
                 "power_boat": UserSettableParameter('slider', 'Quantità di petrolio raccolto da una barca', 10, 1, 10),
-                "qnt": UserSettableParameter('slider', 'Quantità iniziale', 10, 1, 1000),
+                "qnt": UserSettableParameter('slider', 'Quantità iniziale', 10, 1, 100),
                 "qnt_prop": UserSettableParameter('slider', 'Initial quantitaty propagated', 50, 0, 100)}
 
 server = ModularServer(OilSpread, [canvas_element, chart_element], "propagazione petrolio", model_params)

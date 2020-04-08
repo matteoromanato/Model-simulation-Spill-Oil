@@ -25,7 +25,7 @@ class OilSpread(Model):
 
        
         self.datacollector = DataCollector(
-            {"Oil": lambda m: m.schedule.get_agent_count()
+            {"Oil": lambda m: m.schedule.get_agent_count()-self.initial_barche - self.initial_land - self.height
              #"Cane": lambda m: self.count_type(self, 0)
             })
 
@@ -79,9 +79,9 @@ class OilSpread(Model):
         # collect data
         self.datacollector.collect(self)
         
-        print ("il numero di agenti in gioco sono "+str(self.schedule.get_agent_count()))
+        print ("il numero di macchie di petrolio sono in gioco sono "+str(self.schedule.get_agent_count()-self.initial_barche - self.initial_land - self.height))
 
-        if self.schedule.get_agent_count() == self.initial_barche:
+        if self.schedule.get_agent_count() == self.initial_barche + self.initial_land + self.height:
             self.running = False
 
       

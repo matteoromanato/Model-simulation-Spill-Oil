@@ -29,10 +29,10 @@ class OilSpread(Model):
              #"Cane": lambda m: self.count_type(self, 0)
             })
 
-# Create macchie di petrolio
+# Create terra
         for i in range(self.initial_land):          
             x = 0
-            y = self.random.randrange(self.height)
+            y = i
             terra = Land((x, y), self, 0)
             self.grid.place_agent(terra, (x, y))
             self.schedule.add(terra)
@@ -41,6 +41,8 @@ class OilSpread(Model):
         for i in range(self.initial_macchie):   
             x = self.random.randrange(self.width)       
             y = self.random.randrange(self.height)
+            if(x == 0):
+                x += 1
             macchia = Oil((x, y), self, qnt, qnt_prop)
             self.grid.place_agent(macchia, (x, y))
             self.schedule.add(macchia)
@@ -49,6 +51,8 @@ class OilSpread(Model):
         for i in range(self.initial_barche):          
             x = self.random.randrange(self.width)
             y = self.random.randrange(self.height)
+            if(x == 0):
+                x += 1
             barca = Boat((x, y), self, power_boat)
             self.grid.place_agent(barca, (x, y))
             self.schedule.add(barca)

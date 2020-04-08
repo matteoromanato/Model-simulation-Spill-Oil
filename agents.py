@@ -12,9 +12,13 @@ class Oil(Agent):
 
     def step(self):
         # causa dele correnti il petrolio si sposta non rimane fermo
-        #possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,include_center=False)
-        #new_position = self.random.choice(possible_steps)
-        #self.model.grid.move_agent(self, new_position)
+        ok = False
+        while ok == False:
+            possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,include_center=False)
+            new_position = self.random.choice(possible_steps)
+            if(self.model.grid.is_cell_empty(new_position)):
+                self.model.grid.move_agent(self, new_position)
+                ok = True
  
         #oltre a spostarsi il petrolio si sparge coprendo un'area maggiore
         if (self.qnt*self.qnt_prop/100) >= 1:
@@ -24,7 +28,8 @@ class Oil(Agent):
             new_position = self.random.choice(possible_steps)
             macchia = Oil(new_position, self.model, (self.qnt*self.qnt_prop/100), self.qnt_prop)
             self.qnt = self.qnt - (self.qnt*self.qnt_prop/100)
-            self.model.grid.place_agent(macchia, new_position)
+            if(self.model.grid.is_cell_empty(new_position)):
+                self.model.grid.place_agent(macchia, new_position)
             self.model.schedule.add(macchia)
 
 
@@ -56,10 +61,14 @@ class Boat(Agent):
   #             if(other.qnt < 0):
   #                 self.model.grid._remove_agent(other.pos, other)
   #                 self.model.schedule.remove(other)
-        
-        possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,include_center=False)
-        new_position = self.random.choice(possible_steps)
-        self.model.grid.move_agent(self, new_position)
+
+        ok = False
+        while ok == False:
+            possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,include_center=False)
+            new_position = self.random.choice(possible_steps)
+            if(self.model.grid.is_cell_empty(new_position)):
+                self.model.grid.move_agent(self, new_position)
+                ok = True
 
        
 class Land(Agent):

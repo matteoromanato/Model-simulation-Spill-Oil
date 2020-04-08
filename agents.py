@@ -95,9 +95,8 @@ class Bound(Agent):
 
         super().__init__(pos,model)
         self.pos = pos
+        self.type = 3
     
     def step(self):
-        for neighbor in self.model.grid.neighbor_iter(self.pos):
-            if neighbor.type == 0 | neighbor.type==1:
-                block +=1
+        self.pos = self.pos
     

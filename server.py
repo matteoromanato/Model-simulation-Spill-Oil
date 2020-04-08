@@ -30,8 +30,6 @@ def Spread_Oil_portrayal(agent):
     if type(agent) is Bound:
         portrayal["Color"] = ["#0000FF", "#0000FF"]
         portrayal["stroke_color"] = "#FFFFFF"
-        portrayal["text"] = round(agent.status, 1)
-        portrayal["text_color"] = "white"
     return portrayal
 
 

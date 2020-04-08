@@ -17,8 +17,11 @@ class Oil(Agent):
             possible_steps = self.model.grid.get_neighborhood(self.pos,moore=True,include_center=False)
             new_position = self.random.choice(possible_steps)
             if(self.model.grid.is_cell_empty(new_position)):
-                self.model.grid.move_agent(self, new_position)
-                ok = True
+                for neighbor in self.model.grid.neighbor_iter(new_position):
+                    if neighbor.type == 0:
+                        self.model.grid.move_agent(self, new_position)
+                        break
+            ok = True
  
         #oltre a spostarsi il petrolio si sparge coprendo un'area maggiore
         if (self.qnt*self.qnt_prop/100) >= 1:
@@ -26,11 +29,12 @@ class Oil(Agent):
 
             possible_steps = self.model.grid.get_neighborhood(self.pos, moore=True, include_center=False)
             new_position = self.random.choice(possible_steps)
-            macchia = Oil(new_position, self.model, (self.qnt*self.qnt_prop/100), self.qnt_prop)
-            self.qnt = self.qnt - (self.qnt*self.qnt_prop/100)
+            
             if(self.model.grid.is_cell_empty(new_position)):
+                macchia = Oil(new_position, self.model, (self.qnt*self.qnt_prop/100), self.qnt_prop)
+                self.qnt = self.qnt - (self.qnt*self.qnt_prop/100)
                 self.model.grid.place_agent(macchia, new_position)
-            self.model.schedule.add(macchia)
+                self.model.schedule.add(macchia)
 
 
 
@@ -84,3 +88,16 @@ class Land(Agent):
         for neighbor in self.model.grid.neighbor_iter(self.pos):
             if neighbor.type == 0:
                 self.status = 1
+
+class Bound(Agent):
+   
+    def __init__(self,pos,model):
+
+        super().__init__(pos,model)
+        self.pos = pos
+    
+    def step(self):
+        for neighbor in self.model.grid.neighbor_iter(self.pos):
+            if neighbor.type == 0 | neighbor.type==1:
+                block +=1
+    

@@ -2,7 +2,7 @@ from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import CanvasGrid, ChartModule
 from mesa.visualization.UserParam import UserSettableParameter
 
-from agents import Oil,Boat,Land
+from agents import Oil,Boat,Land, Bound
 from model import OilSpread
 
 
@@ -24,6 +24,11 @@ def Spread_Oil_portrayal(agent):
         portrayal["text_color"] = "red"
     if type(agent) is Land:
         portrayal["Color"] = ["#654321", "#654321"]
+        portrayal["stroke_color"] = "#FFFFFF"
+        portrayal["text"] = round(agent.status, 1)
+        portrayal["text_color"] = "white"
+    if type(agent) is Bound:
+        portrayal["Color"] = ["#0000FF", "#0000FF"]
         portrayal["stroke_color"] = "#FFFFFF"
         portrayal["text"] = round(agent.status, 1)
         portrayal["text_color"] = "white"
